@@ -10,12 +10,17 @@ public class Main {
     private static int Filas;
     private static int minas;
     private static boolean running = true;
+    private static int cassillasGiradas;
+    private static int cassillasTotales;
 
     private static boolean verificador=true;
     private static String mensajeError= "";
 
     private static final Scanner lector = new Scanner(System.in);
 
+    //31=Rojo
+    //32=Verde
+    //34=Azul
 
     public static void mostrarTablero() {
         System.out.print("         ");
@@ -28,7 +33,27 @@ public class Main {
             n--;
             System.out.print("     "+n+"  | ");
             for (int j = 0; j < Columnas; j++) {
-                System.out.print(tablero[j][i]+" | ");
+                if (tablero[j][i]==" "){
+                    System.out.print(tablero[j][i]);
+                }else {
+                    if (tablerominas[j][i] < 0) {
+                        System.out.print("\033[31m" + tablero[j][i] + "\u001B[0m");
+                    }
+                    if (tablerominas[j][i] == 0) {
+                        System.out.print("\033[37m" + tablero[j][i] + "\u001B[0m");
+                    }
+                    if (tablerominas[j][i] == 1) {
+                        System.out.print("\033[34m" + tablero[j][i] + "\u001B[0m");
+                    }
+                    if (tablerominas[j][i] == 2) {
+                        System.out.print("\033[32m" + tablero[j][i] + "\u001B[0m");
+                    }
+                    if (tablerominas[j][i] > 2) {
+                        System.out.print("\033[35m" + tablero[j][i] + "\u001B[0m");
+                    }
+                }
+
+                System.out.print(" | ");
             }
             System.out.println();
             if (i < Filas -1) {
@@ -61,46 +86,62 @@ public class Main {
 
     public static void jugada( int x,int y) {
         if (tablero[x][y] == " "){
+            cassillasGiradas++;
             if (tablerominas[x][y] < 0) {
                 tablero[x][y] = "X";
-                verificador = false;
+                System.out.print("GAME OVER");
+                running=false;
             } else {
                 tablero[x][y] = String.valueOf(tablerominas[x][y]);
             }
 
             if (tablerominas[x][y] == 0) {
-                if (x - 1 >= 0 && y - 1 >= 0) {
-                    jugada(x-1,y-1);
-                }
-
-                if (x - 1 >= 0) {
-                    jugada(x-1,y);
-                }
-
-                if (x - 1 >= 0 && y + 1 < Filas) {
-                    jugada(x-1,y+1);
-                }
-
-                if (y - 1 >= 0 ) {
-                    jugada(x,y-1);
-                }
-
-                if (y + 1 < Filas ) {
-                    jugada(x,y+1);
-                }
-
-                if (x + 1 < Columnas && y - 1 >= 0 ) {
-                    jugada(x+1,y-1);
-                }
-
-                if (x + 1 < Columnas) {
-                    jugada(x+1,y);
-                }
-
-                if (x + 1 < Columnas && y + 1 < Filas) {
-                    jugada(x+1,y+1);
-                }
+                esCero(x,y);
             }
+        }
+
+        comprovarVictoria();
+    }
+
+    public static void comprovarVictoria(){
+        if (cassillasGiradas>=cassillasTotales){
+            mostrarTablero();
+            System.out.println("¡¡¡Victoria!!!!!");
+            running=false;
+        }
+    }
+
+    public static void esCero(int x, int y){
+        if (x - 1 >= 0 && y - 1 >= 0) {
+            jugada(x-1,y-1);
+        }
+
+        if (x - 1 >= 0) {
+            jugada(x-1,y);
+        }
+
+        if (x - 1 >= 0 && y + 1 < Filas) {
+            jugada(x-1,y+1);
+        }
+
+        if (y - 1 >= 0 ) {
+            jugada(x,y-1);
+        }
+
+        if (y + 1 < Filas ) {
+            jugada(x,y+1);
+        }
+
+        if (x + 1 < Columnas && y - 1 >= 0 ) {
+            jugada(x+1,y-1);
+        }
+
+        if (x + 1 < Columnas) {
+            jugada(x+1,y);
+        }
+
+        if (x + 1 < Columnas && y + 1 < Filas) {
+            jugada(x+1,y+1);
         }
     }
 
@@ -109,21 +150,25 @@ public class Main {
             System.out.println(mensajeError);
             mensajeError = "";
 
-            System.out.println("Introduzca el numero de fila: ");
-            int fila = lector.nextInt()-1;
-            System.out.println("Introduzca el numero de columna: ");
+            System.out.print("Introduzca el numero de fila: ");
+            int fila = lector.nextInt();
+            fila=Filas-fila;
+
+            System.out.print("Introduzca el numero de columna: ");
             int columna = lector.nextInt()-1;
 
-            if (tablero[columna][fila] == " ") {
-                if (fila >= 0 && fila < Filas && columna >= 0 && columna < Columnas) {
+
+            if (fila >= 0 && fila < Filas && columna >= 0 && columna < Columnas) {
+                if (tablero[columna][fila] == " ") {
                     jugada(columna, fila);
                     verificador = false;
-                } else {
-                    mensajeError = "\n\033[35m**ERROR:\u001B[0m La fila o columna esta fuera de rango";
+                }else{
+                    mensajeError = "\n\033[35m**ERROR:\u001B[0m Esta posicion ya esta verificada";
                 }
-            }else{
-                mensajeError = "\n\033[35m**ERROR:\u001B[0m Esta posicion ya esta verificada";
+            } else {
+                mensajeError = "\n\033[35m**ERROR:\u001B[0m La fila o columna esta fuera de rango";
             }
+
         }
         verificador = true;
     }
@@ -180,6 +225,8 @@ public class Main {
         Columnas=tablero.length;
         Filas=tablero[0].length;
         tablerominas= new int[Columnas][Filas];
+        cassillasGiradas=0;
+        cassillasTotales=(Columnas*Filas)-minas;
 
         //Se asigna un caracter por defecto al tablero
         for (int i = 0; i <= Columnas - 1; i++) {

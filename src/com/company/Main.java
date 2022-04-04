@@ -81,7 +81,7 @@ public class Main {
 
 
         System.out.println("=============================================||| N°Minas " + minas + " |||");
-
+        System.out.println("=========================  Espacios girados:    "+cassillasGiradas+"/"+cassillasTotales+"        |||");
     }
 
     public static void jugada( int x,int y) {
@@ -89,6 +89,7 @@ public class Main {
             cassillasGiradas++;
             if (tablerominas[x][y] < 0) {
                 tablero[x][y] = "X";
+                mostrarTablero();
                 System.out.print("GAME OVER");
                 running=false;
             } else {
@@ -221,7 +222,7 @@ public class Main {
 
     public static void main(String[] args) {
         tablero = new String[9][9];
-        minas=4;
+        minas=10;
         Columnas=tablero.length;
         Filas=tablero[0].length;
         tablerominas= new int[Columnas][Filas];

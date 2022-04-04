@@ -11,7 +11,7 @@ public class Main {
     private static int minas;
     private static boolean running = true;
 
-    private static boolean verificador;
+    private static boolean verificador=true;
     private static String mensajeError= "";
 
     private static final Scanner lector = new Scanner(System.in);
@@ -23,8 +23,10 @@ public class Main {
             System.out.print("___ ");
         }System.out.println();
 
+        int n=Filas+1;
         for (int i = 0; i < Filas; i++) {
-            System.out.print("        | ");
+            n--;
+            System.out.print("     "+n+"  | ");
             for (int j = 0; j < Columnas; j++) {
                 System.out.print(tablero[j][i]+" | ");
             }
@@ -33,9 +35,9 @@ public class Main {
                 System.out.print("        |");
                 for (int p = 0; p < Columnas ; p++) {
                     if (p==Columnas-1){
-                        System.out.print("-––");
+                        System.out.print("--–");
                     }else{
-                        System.out.print("-–– ");
+                        System.out.print("--– ");
                     }
                 }
                 System.out.println("|");
@@ -53,21 +55,83 @@ public class Main {
         }System.out.println();
 
 
-        System.out.print("===============================================||| N° Minas" + minas + " |||");
+        System.out.println("=============================================||| N°Minas " + minas + " |||");
 
     }
 
-    public static void jugada(){
+    public static void jugada( int x,int y) {
+        if (tablero[x][y] == " "){
+            if (tablerominas[x][y] < 0) {
+                tablero[x][y] = "X";
+                verificador = false;
+            } else {
+                tablero[x][y] = String.valueOf(tablerominas[x][y]);
+            }
 
-        int fila = lector.nextInt();
-        int columna = lector.nextInt();
+            if (tablerominas[x][y] == 0) {
+                if (x - 1 >= 0 && y - 1 >= 0) {
+                    jugada(x-1,y-1);
+                }
 
+                if (x - 1 >= 0) {
+                    jugada(x-1,y);
+                }
+
+                if (x - 1 >= 0 && y + 1 < Filas) {
+                    jugada(x-1,y+1);
+                }
+
+                if (y - 1 >= 0 ) {
+                    jugada(x,y-1);
+                }
+
+                if (y + 1 < Filas ) {
+                    jugada(x,y+1);
+                }
+
+                if (x + 1 < Columnas && y - 1 >= 0 ) {
+                    jugada(x+1,y-1);
+                }
+
+                if (x + 1 < Columnas) {
+                    jugada(x+1,y);
+                }
+
+                if (x + 1 < Columnas && y + 1 < Filas) {
+                    jugada(x+1,y+1);
+                }
+            }
+        }
+    }
+
+    public static void eleccion(){
+        while (verificador) {
+            System.out.println(mensajeError);
+            mensajeError = "";
+
+            System.out.println("Introduzca el numero de fila: ");
+            int fila = lector.nextInt()-1;
+            System.out.println("Introduzca el numero de columna: ");
+            int columna = lector.nextInt()-1;
+
+            if (tablero[columna][fila] == " ") {
+                if (fila >= 0 && fila < Filas && columna >= 0 && columna < Columnas) {
+                    jugada(columna, fila);
+                    verificador = false;
+                } else {
+                    mensajeError = "\n\033[35m**ERROR:\u001B[0m La fila o columna esta fuera de rango";
+                }
+            }else{
+                mensajeError = "\n\033[35m**ERROR:\u001B[0m Esta posicion ya esta verificada";
+            }
+        }
+        verificador = true;
     }
 
     public static void play(){
-        while (running){
+        while (running) {
             mostrarTablero();
-            jugada();
+            eleccion();
         }
     }
 

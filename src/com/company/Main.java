@@ -81,7 +81,7 @@ public class Main {
 
 
         System.out.println("=============================================||| N°Minas " + minas + " |||");
-        System.out.println("=========================  Espacios girados:    "+cassillasGiradas+"/"+cassillasTotales+"        |||");
+        System.out.println("============================   Espacios girados:  "+cassillasGiradas+"/"+cassillasTotales+"   =====");
     }
 
     public static void jugada( int x,int y) {
@@ -90,7 +90,7 @@ public class Main {
             if (tablerominas[x][y] < 0) {
                 tablero[x][y] = "X";
                 mostrarTablero();
-                System.out.print("GAME OVER");
+                System.out.print("\033[31mGAME OVER");
                 running=false;
             } else {
                 tablero[x][y] = String.valueOf(tablerominas[x][y]);
@@ -107,7 +107,7 @@ public class Main {
     public static void comprovarVictoria(){
         if (cassillasGiradas>=cassillasTotales){
             mostrarTablero();
-            System.out.println("¡¡¡Victoria!!!!!");
+            System.out.println("\033[32m¡¡¡Victoria!!!!!");
             running=false;
         }
     }

@@ -1,1 +1,1 @@
-# Buscaminas
+# Buscaminas por Samuel Iglesias

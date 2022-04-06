@@ -18,10 +18,6 @@ public class Main {
 
     private static final Scanner lector = new Scanner(System.in);
 
-    //31=Rojo
-    //32=Verde
-    //34=Azul
-
     public static void mostrarTablero() {
         System.out.print("         ");
         for (int i = 0; i < Columnas; i++) {
@@ -33,7 +29,7 @@ public class Main {
             n--;
             System.out.print("     "+n+"  | ");
             for (int j = 0; j < Columnas; j++) {
-                if (tablero[j][i]==" "){
+                if (tablero[j][i].equals(" ")){
                     System.out.print(tablero[j][i]);
                 }else {
                     if (tablerominas[j][i] < 0) {
@@ -85,7 +81,7 @@ public class Main {
     }
 
     public static void jugada( int x,int y) {
-        if (tablero[x][y] == " "){
+        if (tablero[x][y].equals(" ")){
             cassillasGiradas++;
             if (tablerominas[x][y] < 0) {
                 tablero[x][y] = "X";
@@ -113,37 +109,21 @@ public class Main {
     }
 
     public static void esCero(int x, int y){
-        if (x - 1 >= 0 && y - 1 >= 0) {
-            jugada(x-1,y-1);
-        }
+        if (x - 1 >= 0 && y - 1 >= 0) {jugada(x-1,y-1);}
 
-        if (x - 1 >= 0) {
-            jugada(x-1,y);
-        }
+        if (x - 1 >= 0) {jugada(x-1,y);}
 
-        if (x - 1 >= 0 && y + 1 < Filas) {
-            jugada(x-1,y+1);
-        }
+        if (x - 1 >= 0 && y + 1 < Filas) {jugada(x-1,y+1);}
 
-        if (y - 1 >= 0 ) {
-            jugada(x,y-1);
-        }
+        if (y - 1 >= 0 ) {jugada(x,y-1);}
 
-        if (y + 1 < Filas ) {
-            jugada(x,y+1);
-        }
+        if (y + 1 < Filas ) {jugada(x,y+1);}
 
-        if (x + 1 < Columnas && y - 1 >= 0 ) {
-            jugada(x+1,y-1);
-        }
+        if (x + 1 < Columnas && y - 1 >= 0 ) {jugada(x+1,y-1);}
 
-        if (x + 1 < Columnas) {
-            jugada(x+1,y);
-        }
+        if (x + 1 < Columnas) {jugada(x+1,y);}
 
-        if (x + 1 < Columnas && y + 1 < Filas) {
-            jugada(x+1,y+1);
-        }
+        if (x + 1 < Columnas && y + 1 < Filas) {jugada(x+1,y+1);}
     }
 
     public static void eleccion(){
@@ -160,7 +140,7 @@ public class Main {
 
 
             if (fila >= 0 && fila < Filas && columna >= 0 && columna < Columnas) {
-                if (tablero[columna][fila] == " ") {
+                if (tablero[columna][fila].equals(" ")) {
                     jugada(columna, fila);
                     verificador = false;
                 }else{

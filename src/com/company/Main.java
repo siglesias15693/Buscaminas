@@ -29,24 +29,15 @@ public class Main {
             n--;
             System.out.print("     "+n+"  | ");
             for (int j = 0; j < Columnas; j++) {
-                if (tablero[j][i].equals(" ")){
-                    System.out.print(tablero[j][i]);
-                }else {
-                    if (tablerominas[j][i] < 0) {
-                        System.out.print("\033[31m" + tablero[j][i] + "\u001B[0m");
-                    }
-                    if (tablerominas[j][i] == 0) {
-                        System.out.print("\033[37m" + tablero[j][i] + "\u001B[0m");
-                    }
-                    if (tablerominas[j][i] == 1) {
-                        System.out.print("\033[34m" + tablero[j][i] + "\u001B[0m");
-                    }
-                    if (tablerominas[j][i] == 2) {
-                        System.out.print("\033[32m" + tablero[j][i] + "\u001B[0m");
-                    }
-                    if (tablerominas[j][i] > 2) {
-                        System.out.print("\033[35m" + tablero[j][i] + "\u001B[0m");
-                    }
+
+                switch (tablero[j][i]){
+                    case " ":System.out.print(tablero[j][i]);break;
+                    case "X":System.out.print("\033[31m" + tablero[j][i] + "\u001B[0m");break;
+                    case "0":System.out.print("\033[37m" + tablero[j][i] + "\u001B[0m");break;
+                    case "1":System.out.print("\033[34m" + tablero[j][i] + "\u001B[0m");break;
+                    case "2":System.out.print("\033[32m" + tablero[j][i] + "\u001B[0m");break;
+
+                    default:System.out.print("\033[35m" + tablero[j][i] + "\u001B[0m");break;
                 }
 
                 System.out.print(" | ");

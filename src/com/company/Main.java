@@ -81,20 +81,18 @@ public class Main {
     }
 
     public static void jugada( int x,int y) {
-        if (tablero[x][y].equals(" ")){
-            cassillasGiradas++;
-            if (tablerominas[x][y] < 0) {
-                tablero[x][y] = "X";
-                mostrarTablero();
-                System.out.print("\033[31mGAME OVER");
-                running=false;
-            } else {
-                tablero[x][y] = String.valueOf(tablerominas[x][y]);
-            }
+        cassillasGiradas++;
+        if (tablerominas[x][y] < 0) {
+            tablero[x][y] = "X";
+            mostrarTablero();
+            System.out.print("\033[31mGAME OVER");
+            running=false;
+        } else {
+            tablero[x][y] = String.valueOf(tablerominas[x][y]);
+        }
 
-            if (tablerominas[x][y] == 0) {
-                esCero(x,y);
-            }
+        if (tablerominas[x][y] == 0) {
+            esCero(x,y);
         }
 
         comprovarVictoria();

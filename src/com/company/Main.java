@@ -68,7 +68,7 @@ public class Main {
 
 
         System.out.println("=============================================||| N°Minas " + minas + " |||");
-        System.out.println("============================   Espacios girados:  "+cassillasGiradas+"/"+cassillasTotales+"   =====");
+        System.out.println("==============================  Espacios restantes:  "+(cassillasTotales-cassillasGiradas)+"   =====");
     }
 
     public static void jugada( int x,int y) {

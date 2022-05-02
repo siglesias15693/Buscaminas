@@ -27,20 +27,20 @@ public class Main {
         int n=Filas+1;
         for (int i = 0; i < Filas; i++) {
             n--;
-            System.out.print("     "+n+"  | ");
+            System.out.print("     "+n+"  |");
             for (int j = 0; j < Columnas; j++) {
 
                 switch (tablero[j][i]){
                     case " ":System.out.print(tablero[j][i]);break;
-                    case "X":System.out.print("\033[31m" + tablero[j][i] + "\u001B[0m");break;
-                    case "0":System.out.print("\033[37m" + tablero[j][i] + "\u001B[0m");break;
-                    case "1":System.out.print("\033[34m" + tablero[j][i] + "\u001B[0m");break;
-                    case "2":System.out.print("\033[32m" + tablero[j][i] + "\u001B[0m");break;
+                    case "X":System.out.print("\033[41m " + tablero[j][i] + " \u001B[0m");break;
+                    case "0":System.out.print("\033[47m " + tablero[j][i] + " \u001B[0m");break;
+                    case "1":System.out.print("\033[44m " + tablero[j][i] + " \u001B[0m");break;
+                    case "2":System.out.print("\033[42m " + tablero[j][i] + " \u001B[0m");break;
 
                     default:System.out.print("\033[35m" + tablero[j][i] + "\u001B[0m");break;
                 }
 
-                System.out.print(" | ");
+                System.out.print("|");
             }
             System.out.println();
             if (i < Filas -1) {
@@ -72,7 +72,7 @@ public class Main {
     }
 
     public static void jugada( int x,int y) {
-        if (tablero[x][y].equals(" ")){
+        if (tablero[x][y].equals("   ")){
             cassillasGiradas++;
             if (tablerominas[x][y] < 0) {
                 tablero[x][y] = "X";
@@ -131,8 +131,8 @@ public class Main {
 
 
             if (fila >= 0 && fila < Filas && columna >= 0 && columna < Columnas) {
-                if (tablero[columna][fila].equals(" ")) {
-                    jugada(columna, fila);
+                if (tablero[columna][fila].equals("   ")) {
+                    jugada(columna,fila);
                     verificador = false;
                 }else{
                     mensajeError = "\n\033[35m**ERROR:\u001B[0m Esta posicion ya esta verificada";
@@ -203,7 +203,7 @@ public class Main {
         //Se asigna un caracter por defecto al tablero
         for (int i = 0; i <= Columnas - 1; i++) {
             for (int j = 0; j <= Filas - 1; j++) {
-                tablero[i][j] = " ";
+                tablero[i][j] = "   ";
                 tablerominas[i][j]=0;
             }
         }

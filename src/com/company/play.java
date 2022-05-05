@@ -1,7 +1,5 @@
 package com.company;
 
-import java.util.Scanner;
-
 public class play extends Main{
 
     public static void jugada( int x,int y) {

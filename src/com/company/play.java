@@ -7,17 +7,17 @@ public class play extends Main{
             cassillasGiradas++;
             if (tablerominas[x][y] < 0) {
                 tablero[x][y] = "X";
-                logic.gameover();
+                gameover();
             } else {
                 tablero[x][y] = String.valueOf(tablerominas[x][y]);
             }
 
             if (tablerominas[x][y] == 0) {
-                logic.esCero(x,y);
+                esCero(x,y);
             }
         }
 
-        logic.comprovarVictoria();
+        comprovarVictoria();
     }
 
     public static void eleccion(){

@@ -3,16 +3,15 @@ package com.company;
 public class play extends Main{
 
     public static void jugada( int x,int y) {
-        if (tablero[x][y].equals("   ")){
+        if (!tablero[x][y].isUp()){
             cassillasGiradas++;
-            if (tablerominas[x][y] < 0) {
-                tablero[x][y] = "X";
+
+            tablero[x][y].setUp();
+            if (tablero[x][y].isMina()) {
                 gameover();
-            } else {
-                tablero[x][y] = String.valueOf(tablerominas[x][y]);
             }
 
-            if (tablerominas[x][y] == 0) {
+            if (tablero[x][y].getMinas() == 0) {
                 esCero(x,y);
             }
         }
@@ -34,7 +33,7 @@ public class play extends Main{
 
 
             if (fila >= 0 && fila < Filas && columna >= 0 && columna < Columnas) {
-                if (tablero[columna][fila].equals("   ")) {
+                if (!tablero[columna][fila].isUp()) {
                     jugada(columna,fila);
                     verificador = false;
                 }else{
@@ -46,13 +45,6 @@ public class play extends Main{
 
         }
         verificador = true;
-    }
-
-    public static void play(){
-        while (running) {
-            dibujo.mostrarTablero();
-            eleccion();
-        }
     }
 
 }

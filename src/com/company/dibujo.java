@@ -14,14 +14,22 @@ public class dibujo extends Main{
             System.out.print("     "+n+"  |");
             for (int j = 0; j < Columnas; j++) {
 
-                switch (tablero[j][i]){
-                    case "   ":System.out.print(tablero[j][i]);break;
-                    case "X":System.out.print("\033[41m " + tablero[j][i] + " \u001B[0m");break;
-                    case "0":System.out.print("\033[47m " + tablero[j][i] + " \u001B[0m");break;
-                    case "1":System.out.print("\033[44m " + tablero[j][i] + " \u001B[0m");break;
-                    case "2":System.out.print("\033[42m " + tablero[j][i] + " \u001B[0m");break;
+                if (tablero[j][i].isUp()){
 
-                    default:System.out.print("\033[45m " + tablero[j][i] + " \u001B[0m");break;
+                    if(tablero[j][i].isMina()){
+                        System.out.print("\033[41m X \u001B[0m");
+                    }else{
+                        switch (tablero[j][i].getMinas()){
+                            case 0:System.out.print("\033[47m " + tablero[j][i].getMinas() + " \u001B[0m");break;
+                            case 1:System.out.print("\033[44m " + tablero[j][i].getMinas() + " \u001B[0m");break;
+                            case 2:System.out.print("\033[42m " + tablero[j][i].getMinas() + " \u001B[0m");break;
+
+                            default:System.out.print("\033[45m " + tablero[j][i].getMinas() + " \u001B[0m");break;
+                        }
+                    }
+
+                }else{
+                    System.out.print("   ");
                 }
 
                 System.out.print("|");

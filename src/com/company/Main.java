@@ -3,39 +3,47 @@ package com.company;
 import java.util.Scanner;
 
 public class Main{
-    public static String[][] tablero;
-    public static int[][] tablerominas;
+    public static Cells[][] tablero;
     public static int Columnas;
     public static int Filas;
     public static int minas;
     public static int cassillasGiradas;
     public static int cassillasTotales;
     public static boolean running = true;
+    public static Cells Cells;
 
     public static boolean verificador=true;
     public static String mensajeError= "";
     public static final Scanner lector = new Scanner(System.in);
 
     public static void main(String[] args) {
-        tablero = new String[9][9];
+
         minas=10;
-        Columnas=tablero.length;
-        Filas=tablero[0].length;
-        tablerominas= new int[Columnas][Filas];
+        Columnas=9;
+        Filas=9;
+        tablero = new Cells[Columnas][Filas];
         cassillasGiradas=0;
         cassillasTotales=(Columnas*Filas)-minas;
+
 
         //Se asigna un caracter por defecto al tablero
         for (int i = 0; i <= Columnas - 1; i++) {
             for (int j = 0; j <= Filas - 1; j++) {
-                tablero[i][j] = "   ";
-                tablerominas[i][j]=0;
+                tablero[i][j] = new Cells();
             }
         }
 
+        play();
+    }
+
+    public static void play(){
         assignarMinas();
         assignarValores();
-        play.play();
+
+        while (running) {
+            dibujo.mostrarTablero();
+            play.eleccion();
+        }
     }
 
     public static void assignarMinas() {
@@ -44,8 +52,8 @@ public class Main{
             int x = (int) (Math.random() * Columnas);
             int y = (int) (Math.random() * Filas);
 
-            if (tablerominas[x][y] == 0) {
-                tablerominas[x][y] = -1;
+            if (!tablero[x][y].isMina()) {
+                tablero[x][y].setMina();
                 m++;
             }
         }
@@ -54,38 +62,38 @@ public class Main{
     public static void assignarValores() {
         for (int x = 0; x < Columnas; x++) {
             for (int y = 0; y < Filas; y++) {
-                if (tablerominas[x][y] == -1) {
+                if (tablero[x][y].isMina()){
 
-                    if (x - 1 >= 0 && y - 1 >= 0 && tablerominas[x - 1][y - 1] != -1) {
-                        tablerominas[x - 1][y - 1]++;
+                    if (x - 1 >= 0 && y - 1 >= 0) {
+                        tablero[x - 1][y - 1].setMinas();
                     }
 
-                    if (x - 1 >= 0 && tablerominas[x - 1][y] != -1) {
-                        tablerominas[x - 1][y]++;
+                    if (x - 1 >= 0) {
+                        tablero[x - 1][y].setMinas();
                     }
 
-                    if (x - 1 >= 0 && y + 1 < Filas && tablerominas[x - 1][y + 1] != -1) {
-                        tablerominas[x - 1][y + 1]++;
+                    if (x - 1 >= 0 && y + 1 < Filas) {
+                        tablero[x - 1][y + 1].setMinas();
                     }
 
-                    if (y - 1 >= 0 && tablerominas[x][y - 1] != -1) {
-                        tablerominas[x][y - 1]++;
+                    if (y - 1 >= 0) {
+                        tablero[x][y - 1].setMinas();
                     }
 
-                    if (y + 1 < Filas && tablerominas[x][y + 1] != -1) {
-                        tablerominas[x][y + 1]++;
+                    if (y + 1 < Filas ) {
+                        tablero[x][y + 1].setMinas();
                     }
 
-                    if (x + 1 < Columnas && y - 1 >= 0 && tablerominas[x + 1][y - 1] != -1) {
-                        tablerominas[x + 1][y - 1]++;
+                    if (x + 1 < Columnas && y - 1 >= 0 ) {
+                        tablero[x + 1][y - 1].setMinas();
                     }
 
-                    if (x + 1 < Columnas && tablerominas[x + 1][y] != -1) {
-                        tablerominas[x + 1][y]++;
+                    if (x + 1 < Columnas) {
+                        tablero[x + 1][y].setMinas();
                     }
 
-                    if (x + 1 < Columnas && y + 1 < Filas && tablerominas[x + 1][y + 1] != -1) {
-                        tablerominas[x + 1][y + 1]++;
+                    if (x + 1 < Columnas && y + 1 < Filas) {
+                        tablero[x + 1][y + 1].setMinas();
                     }
 
                 }

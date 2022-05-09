@@ -1,6 +1,8 @@
 package com.company;
 
-public class play extends Main{
+import static com.company.Main.*;
+
+public class play {
 
     public static void jugada( int x,int y) {
         if (!tablero[x][y].isUp()){

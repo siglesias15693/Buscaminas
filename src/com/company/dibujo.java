@@ -1,6 +1,8 @@
 package com.company;
 
-public class dibujo extends Main{
+import static com.company.Main.*;
+
+public class dibujo{
 
     public static void mostrarTablero() {
         System.out.print("         ");

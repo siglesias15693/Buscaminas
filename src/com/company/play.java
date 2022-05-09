@@ -5,8 +5,8 @@ public class play extends Main{
     public static void jugada( int x,int y) {
         if (!tablero[x][y].isUp()){
             cassillasGiradas++;
-
             tablero[x][y].setUp();
+
             if (tablero[x][y].isMina()) {
                 gameover();
             }

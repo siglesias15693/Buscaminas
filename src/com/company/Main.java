@@ -10,7 +10,6 @@ public class Main{
     public static int cassillasGiradas;
     public static int cassillasTotales;
     public static boolean running = true;
-    public static Cells Cells;
 
     public static boolean verificador=true;
     public static String mensajeError= "";

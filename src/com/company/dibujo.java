@@ -13,7 +13,14 @@ public class dibujo{
         int n=Filas+1;
         for (int i = 0; i < Filas; i++) {
             n--;
-            System.out.print("     "+n+"  |");
+
+            if (n>9){
+                System.out.print("     "+n+" |");
+            }else{
+                System.out.print("     "+n+"  |");
+            }
+
+
             for (int j = 0; j < Columnas; j++) {
 
                 if (tablero[j][i].isUp()){
@@ -58,7 +65,13 @@ public class dibujo{
 
         System.out.print("          ");
         for (int i = 1; i < Columnas + 1; i++) {
-            System.out.print(i + "   ");
+
+            if (i>8){
+                System.out.print(i + "  ");
+            }else{
+                System.out.print(i + "   ");
+            }
+
         }System.out.println();
 
 

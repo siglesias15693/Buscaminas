@@ -1,12 +1,8 @@
 package com.company;
 
-import java.util.Scanner;
-
 import static com.company.Main.*;
 
 public class play {
-
-    public static final Scanner lector = new Scanner(System.in);
 
     public static void jugada( int x,int y) {
         if (!tablero[x][y].isUp()){

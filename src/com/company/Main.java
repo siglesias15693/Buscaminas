@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Scanner;
+
 public class Main{
     public static Cells[][] tablero;
     public static int Columnas;
@@ -12,11 +14,12 @@ public class Main{
     public static boolean verificador=true;
     public static String mensajeError= "";
 
+    public static final Scanner lector = new Scanner(System.in);
+
     public static void main(String[] args) {
 
-        minas=10;
-        Columnas=9;
-        Filas=9;
+        dificulty();
+
         tablero = new Cells[Columnas][Filas];
         cassillasGiradas=0;
         cassillasTotales=(Columnas*Filas)-minas;
@@ -30,6 +33,39 @@ public class Main{
         }
 
         play();
+    }
+
+    public static void dificulty(){
+        boolean didiculty=true;
+
+        while (didiculty){
+            System.out.println("Seleccione dificultad: \n  1-Facil \n  2-Normal \n  3-Dificil ");
+            int d = lector.nextInt();
+
+            if (d==1){
+                minas=10;
+                Columnas=10;
+                Filas=8;
+                didiculty=false;
+            }
+
+            if (d==2){
+                minas=20;
+                Columnas=16;
+                Filas=14;
+                didiculty=false;
+            }
+
+            if (d==3){
+                minas=30;
+                Columnas=22;
+                Filas=20;
+                didiculty=false;
+            }
+
+
+        }
+
     }
 
     public static void play(){

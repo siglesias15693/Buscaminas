@@ -31,7 +31,7 @@ public class dibujo{
                     }
 
                 }else if (tablero[j][i].getFlag()){
-                    System.out.print(" \033[31mF\u001B[0m ");
+                    System.out.print("\033[31m F \u001B[0m");
                 }else{
                     System.out.print("   ");
                 }

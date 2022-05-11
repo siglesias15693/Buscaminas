@@ -23,8 +23,8 @@ public class Main{
 
 
         //Se asigna un caracter por defecto al tablero
-        for (int i = 0; i <= Columnas - 1; i++) {
-            for (int j = 0; j <= Filas - 1; j++) {
+        for (int i = 0; i < Columnas; i++) {
+            for (int j = 0; j < Filas; j++) {
                 tablero[i][j] = new Cells();
             }
         }

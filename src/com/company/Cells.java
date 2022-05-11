@@ -2,13 +2,13 @@ package com.company;
 
 public class Cells {
     private boolean mina;
-    private boolean arriva;
+    private boolean rotated;
     private boolean flag;
     private int minas;
 
     public Cells(){
         this.mina=false;
-        this.arriva=false;
+        this.rotated=false;
         this.flag=false;
         this.minas=0;
     }
@@ -18,7 +18,7 @@ public class Cells {
     }
 
     public boolean isUp(){
-        return (this.arriva);
+        return (this.rotated);
     }
 
     public int getMinas(){
@@ -37,7 +37,7 @@ public class Cells {
     }
 
     public void setUp(){
-        this.arriva=true;
+        this.rotated=true;
     }
 
     public void setFlag(){

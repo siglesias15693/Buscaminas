@@ -29,8 +29,7 @@ public class play {
         while (verificador) {
             System.out.println(mensajeError);
             mensajeError = "";
-            System.out.print("Flag?[Y/N]: ");
-            String f = lector.next();
+
 
             System.out.print("Introduzca el numero de fila: ");
             int fila = lector.nextInt();
@@ -39,7 +38,8 @@ public class play {
             System.out.print("Introduzca el numero de columna: ");
             int columna = lector.nextInt()-1;
 
-
+            System.out.print("Flag?[Y/N]: ");
+            String f = lector.next();
 
             boolean flag=false;
             if (f.equals("Y") | f.equals("y")){

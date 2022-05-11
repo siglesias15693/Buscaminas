@@ -7,40 +7,63 @@ public class Cells {
     private int minas;
 
     public Cells(){
-        this.mina=false;
-        this.rotated=false;
-        this.flag=false;
-        this.minas=0;
+        mina=false;
+        rotated=false;
+        flag=false;
+        minas=0;
     }
 
     public boolean isMina(){
-        return (this.mina);
+        return (mina);
     }
 
     public boolean isUp(){
-        return (this.rotated);
+        return (rotated);
     }
 
     public int getMinas(){
-        return (this.minas);
+        return (minas);
     }
 
     public boolean getFlag(){return flag;}
 
 
     public void setMina() {
-        this.mina = true;
+        mina = true;
     }
 
     public void setMinas(){
-        this.minas++;
+        minas++;
     }
 
     public void setUp(){
-        this.rotated=true;
+        rotated=true;
     }
 
     public void setFlag(){
-        this.flag=!flag;
+        flag=!flag;
     }
+
+    public String show(){
+        if (rotated){
+
+            if(mina){
+                return ("\033[41m X \u001B[0m");
+            }else{
+                switch (minas){
+                    case 0:return ("\033[47m " + minas + " \u001B[0m");
+                    case 1:return ("\033[44m " + minas + " \u001B[0m");
+                    case 2:return ("\033[42m " + minas + " \u001B[0m");
+
+                    default:return ("\033[45m " + minas + " \u001B[0m");
+                }
+            }
+
+        }else if (flag){
+            return ("\033[31m F \u001B[0m");
+        }else{
+            return ("   ");
+        }
+    }
+
 }

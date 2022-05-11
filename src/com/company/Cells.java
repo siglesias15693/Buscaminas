@@ -41,6 +41,6 @@ public class Cells {
     }
 
     public void setFlag(){
-        this.flag=true;
+        this.flag=!flag;
     }
 }

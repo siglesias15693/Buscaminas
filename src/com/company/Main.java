@@ -39,7 +39,10 @@ public class Main{
         boolean didiculty=true;
 
         while (didiculty){
-            System.out.println("Seleccione dificultad: \n  1-Facil \n  2-Normal \n  3-Dificil ");
+            System.out.println("Seleccione dificultad: ");
+            System.out.println("        1-Facil ");
+            System.out.println("        2-Normal ");
+            System.out.println("        3-Dificil ");
             int d = lector.nextInt();
 
             if (d==1){
@@ -74,7 +77,7 @@ public class Main{
 
         while (running) {
             dibujo.mostrarTablero();
-            play.eleccion();
+            eleccion();
         }
     }
 
@@ -135,35 +138,35 @@ public class Main{
 
     public static void esCero(int x, int y) {
         if (x - 1 >= 0 && y - 1 >= 0) {
-            play.jugada(x - 1, y - 1);
+            jugada(x - 1, y - 1);
         }
 
         if (x - 1 >= 0) {
-            play.jugada(x - 1, y);
+            jugada(x - 1, y);
         }
 
         if (x - 1 >= 0 && y + 1 < Filas) {
-            play.jugada(x - 1, y + 1);
+            jugada(x - 1, y + 1);
         }
 
         if (y - 1 >= 0) {
-            play.jugada(x, y - 1);
+            jugada(x, y - 1);
         }
 
         if (y + 1 < Filas) {
-            play.jugada(x, y + 1);
+            jugada(x, y + 1);
         }
 
         if (x + 1 < Columnas && y - 1 >= 0) {
-            play.jugada(x + 1, y - 1);
+            jugada(x + 1, y - 1);
         }
 
         if (x + 1 < Columnas) {
-            play.jugada(x + 1, y);
+            jugada(x + 1, y);
         }
 
         if (x + 1 < Columnas && y + 1 < Filas) {
-            play.jugada(x + 1, y + 1);
+            jugada(x + 1, y + 1);
         }
     }
 
@@ -181,5 +184,67 @@ public class Main{
         }
     }
 
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    public static void jugada( int x,int y) {
+        if (!tablero[x][y].isUp()){
+            cassillasGiradas++;
+            tablero[x][y].setUp();
+
+            if (tablero[x][y].isMina()) {
+                gameover();
+            }
+
+            if (tablero[x][y].getMinas() == 0) {
+                esCero(x,y);
+            }
+        }
+
+        comprovarVictoria();
+    }
+
+    public static void eleccion(){
+        while (verificador) {
+            System.out.println(mensajeError);
+            mensajeError = "";
+
+
+            System.out.print("Introduzca el numero de fila: ");
+            int fila = lector.nextInt();
+            fila=Filas-fila;
+
+            System.out.print("Introduzca el numero de columna: ");
+            int columna = lector.nextInt()-1;
+
+            System.out.print("Flag?[Y/N]: ");
+            String f = lector.next();
+
+            boolean flag=false;
+            if (f.equals("Y") | f.equals("y")){
+                flag=true;
+            }
+
+            if (flag){
+                tablero[columna][fila].setFlag();
+                verificador = false;
+            }else{
+                if (fila >= 0 && fila < Filas && columna >= 0 && columna < Columnas) {
+                    if (!tablero[columna][fila].isUp()) {
+                        jugada(columna,fila);
+                        verificador = false;
+                    }else{
+                        mensajeError = "\n\033[35m**ERROR:\u001B[0m Esta posicion ya esta verificada";
+                    }
+                } else {
+                    mensajeError = "\n\033[35m**ERROR:\u001B[0m La fila o columna esta fuera de rango";
+                }
+            }
+        }
+        verificador = true;
+    }
+
 }
+
 

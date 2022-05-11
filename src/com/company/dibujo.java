@@ -42,6 +42,7 @@ public class dibujo{
                 }else{
                     System.out.print("   ");
                 }
+
                 System.out.print("|");
             }
             System.out.println();

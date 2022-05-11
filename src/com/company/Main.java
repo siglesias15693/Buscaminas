@@ -1,7 +1,5 @@
 package com.company;
 
-import java.util.Scanner;
-
 public class Main{
     public static Cells[][] tablero;
     public static int Columnas;
@@ -13,7 +11,6 @@ public class Main{
 
     public static boolean verificador=true;
     public static String mensajeError= "";
-    public static final Scanner lector = new Scanner(System.in);
 
     public static void main(String[] args) {
 

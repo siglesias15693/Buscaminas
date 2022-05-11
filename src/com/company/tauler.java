@@ -27,5 +27,35 @@ public class tauler {
         return tablero[x][y].isMina();
     }
 
+    public boolean isUp(int x, int y){
+        return tablero[x][y].isUp();
+    }
+
+    public int getMinas(int x, int y){
+        return tablero[x][y].getMinas();
+    }
+
+    public boolean getFlag(int x, int y){
+        return tablero[x][y].getFlag();
+    }
+
+
+
+    public void setMina(int x, int y){
+        tablero[x][y].setMina();
+    }
+
+    public void sumMinas(int x, int y){
+        tablero[x][y].setMinas();
+    }
+
+    public void setUp(int x, int y){
+        tablero[x][y].setUp();
+    }
+
+    public void setFlag(int x, int y){
+        tablero[x][y].setFlag();
+    }
+
 
 }

@@ -44,8 +44,8 @@ public class Main{
             int x = (int) (Math.random() * Columnas);
             int y = (int) (Math.random() * Filas);
 
-            if (!tauler.cell(x,y).isMina()) {
-                tauler.cell(x,y).setMina();
+            if (!tauler.isMina(x,y)) {
+                tauler.setMina(x,y);
                 m++;
             }
         }
@@ -54,38 +54,38 @@ public class Main{
     public static void assignarValores() {
         for (int x = 0; x < Columnas; x++) {
             for (int y = 0; y < Filas; y++) {
-                if (tauler.cell(x,y).isMina()){
+                if (tauler.isMina(x,y)){
 
                     if (x - 1 >= 0 && y - 1 >= 0) {
-                        tauler.cell(x-1,y-1).setMinas();
+                        tauler.sumMinas(x-1,y-1);
                     }
 
                     if (x - 1 >= 0) {
-                        tauler.cell(x-1,y).setMinas();
+                        tauler.sumMinas(x-1,y);
                     }
 
                     if (x - 1 >= 0 && y + 1 < Filas) {
-                        tauler.cell(x-1,y+1).setMinas();
+                        tauler.sumMinas(x-1,y+1);
                     }
 
                     if (y - 1 >= 0) {
-                        tauler.cell(x,y-1).setMinas();
+                        tauler.sumMinas(x,y-1);
                     }
 
                     if (y + 1 < Filas ) {
-                        tauler.cell(x,y+1).setMinas();
+                        tauler.sumMinas(x,y+1);
                     }
 
                     if (x + 1 < Columnas && y - 1 >= 0 ) {
-                        tauler.cell(x+1,y-1).setMinas();
+                        tauler.sumMinas(x+1,y-1);
                     }
 
                     if (x + 1 < Columnas) {
-                        tauler.cell(x+1,y).setMinas();
+                        tauler.sumMinas(x+1,y);
                     }
 
                     if (x + 1 < Columnas && y + 1 < Filas) {
-                        tauler.cell(x+1,y+1).setMinas();
+                        tauler.sumMinas(x+1,y+1);
                     }
 
                 }

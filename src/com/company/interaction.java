@@ -48,11 +48,11 @@ public class interaction {
             cassillasGiradas++;
             tauler.cell(x,y).setUp();
 
-            if (tauler.cell(x,y).isMina()) {
+            if (tauler.isMina(x,y)) {
                 gameover();
             }
 
-            if (tauler.cell(x,y).getMinas() == 0) {
+            if (tauler.getMinas(x,y) == 0) {
                 esCero(x,y);
             }
         }
@@ -82,11 +82,11 @@ public class interaction {
             }
 
             if (flag){
-                tauler.cell(columna,fila).setFlag();
+                tauler.setFlag(columna,fila);
                 verificador = false;
             }else{
                 if (fila >= 0 && fila < Filas && columna >= 0 && columna < Columnas) {
-                    if (!tauler.cell(columna,fila).isUp()) {
+                    if (!tauler.isUp(columna,fila)) {
                         jugada(columna,fila);
                         verificador = false;
                     }else{

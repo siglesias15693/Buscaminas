@@ -4,13 +4,13 @@ public class Cells {
     private boolean mina;
     private boolean rotated;
     private boolean flag;
-    private int minas;
+    private int minasArround;
 
     public Cells(){
         mina=false;
         rotated=false;
         flag=false;
-        minas=0;
+        minasArround =0;
     }
 
     public boolean isMina(){
@@ -21,8 +21,10 @@ public class Cells {
         return (rotated);
     }
 
-    public int getMinas(){
-        return (minas);
+    public boolean isFlag(){return flag;}
+
+    public int getMinasArround(){
+        return (minasArround);
     }
 
 
@@ -31,7 +33,7 @@ public class Cells {
     }
 
     public void setMinas(){
-        minas++;
+        minasArround++;
     }
 
     public void setUp(){
@@ -48,12 +50,12 @@ public class Cells {
             if(mina){
                 return ("\033[41m X \u001B[0m");
             }else{
-                switch (minas){
-                    case 0:return ("\033[47m " + minas + " \u001B[0m");
-                    case 1:return ("\033[44m " + minas + " \u001B[0m");
-                    case 2:return ("\033[42m " + minas + " \u001B[0m");
+                switch (minasArround){
+                    case 0:return ("\033[47m " + minasArround + " \u001B[0m");
+                    case 1:return ("\033[44m " + minasArround + " \u001B[0m");
+                    case 2:return ("\033[42m " + minasArround + " \u001B[0m");
 
-                    default:return ("\033[45m " + minas + " \u001B[0m");
+                    default:return ("\033[45m " + minasArround + " \u001B[0m");
                 }
             }
 

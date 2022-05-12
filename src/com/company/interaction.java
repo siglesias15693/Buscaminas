@@ -1,11 +1,14 @@
 package com.company;
 
-import static com.company.init.*;
+import static com.company.game.*;
 import java.util.Scanner;
 
 public class interaction {
 
-    public static final Scanner lector = new Scanner(System.in);
+    private static boolean verificador=true;
+    private static String mensajeError= "";
+
+    private static final Scanner lector = new Scanner(System.in);
 
     public static void dificulty(){
         boolean didiculty=true;
@@ -18,23 +21,23 @@ public class interaction {
             int d = lector.nextInt();
 
             if (d==1){
-                minas=10;
-                Columnas=10;
-                Filas=8;
+                tauler.setTotalMinas(10);
+                tauler.setCol(10);
+                tauler.setRow(8);
                 didiculty=false;
             }
 
             if (d==2){
-                minas=20;
-                Columnas=16;
-                Filas=14;
+                tauler.setTotalMinas(20);
+                tauler.setCol(16);
+                tauler.setRow(14);
                 didiculty=false;
             }
 
             if (d==3){
-                minas=30;
-                Columnas=22;
-                Filas=20;
+                tauler.setTotalMinas(30);
+                tauler.setCol(22);
+                tauler.setRow(20);
                 didiculty=false;
             }
 
@@ -45,14 +48,14 @@ public class interaction {
 
     public static void jugada( int x,int y) {
         if (!tauler.getCell(x,y).isUp()){
-            cassillasGiradas++;
+
             tauler.getCell(x,y).setUp();
 
             if (tauler.isMina(x,y)) {
                 gameover();
             }
 
-            if (tauler.getMinas(x,y) == 0) {
+            if (tauler.getMinasArround(x,y) == 0) {
                 esCero(x,y);
             }
         }
@@ -68,7 +71,7 @@ public class interaction {
 
             System.out.print("Introduzca el numero de fila: ");
             int fila = lector.nextInt();
-            fila=Filas-fila;
+            fila=tauler.getRow()-fila;
 
             System.out.print("Introduzca el numero de columna: ");
             int columna = lector.nextInt()-1;
@@ -76,23 +79,20 @@ public class interaction {
             System.out.print("Flag?[Y/N]: ");
             String f = lector.next();
 
-            boolean flag=false;
-            if (f.equals("Y") | f.equals("y")){
-                flag=true;
-            }
+            boolean flag=( f.equals("Y") | f.equals("y") );
 
             if (flag){
                 tauler.setFlag(columna,fila);
                 verificador = false;
             }else{
-                if (fila >= 0 && fila < Filas && columna >= 0 && columna < Columnas) {
+                try {
                     if (!tauler.isUp(columna,fila)) {
                         jugada(columna,fila);
                         verificador = false;
                     }else{
                         mensajeError = "\n\033[35m**ERROR:\u001B[0m Esta posicion ya esta verificada";
                     }
-                } else {
+                } catch (Exception e){
                     mensajeError = "\n\033[35m**ERROR:\u001B[0m La fila o columna esta fuera de rango";
                 }
             }

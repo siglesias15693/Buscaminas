@@ -1,10 +1,8 @@
 package com.company;
 
-import static com.company.game.tauler;
-
 public class dibujo{
 
-    public static void mostrarTablero() {
+    public static void mostrarTablero(tauler tauler) {
         System.out.print("         ");
         for (int i = 0; i < tauler.getCol(); i++) {
             System.out.print("___ ");
@@ -54,11 +52,11 @@ public class dibujo{
                 System.out.print(i + "   ");
             }
 
-        }System.out.println();
+        }System.out.println();System.out.println();
 
 
-        System.out.println("=============================================||| N°Minas " + tauler.getTotalFlags() + "/" + tauler.getTotalMinas() + " |||");
-        System.out.println("==============================  Espacios restantes:  "+tauler.getRestantes()+"   =====");
+        System.out.println("        |======================|| N°Minas " + tauler.getTotalFlags() + "/" + tauler.getTotalMinas() + " ||");
+
     }
 
 }

@@ -2,15 +2,25 @@ package com.company;
 
 public class tauler {
 
-    private Cells[][] tablero;
+    private final Cells[][] tablero;
     private int totalMinas;
     private static int col;
     private static int row;
 
+    private int totalUp;
+    private int totalFlags;
 
     public tauler(){
 
+        int[] dif=interaction.dificulty();
+        setTotalMinas(dif[0]);
+        setCol(dif[1]);
+        setRow(dif[2]);
+
         tablero = new Cells[col][row];
+
+        totalUp =0;
+        totalFlags=0;
 
         for (int i = 0; i < col; i++) {
             for (int j = 0; j < row; j++) {
@@ -18,25 +28,6 @@ public class tauler {
             }
         }
 
-
-    }
-
-    public int getTotalUp(){
-       int cassillasGiradas=0;
-
-        for (int i=0;i<col;i++){
-            for (int j=0;j<row;j++){
-                if (tablero[i][j].isUp()){
-                    cassillasGiradas++;
-                }
-            }
-        }
-
-       return cassillasGiradas;
-    }
-
-    public int getRestantes(){
-        return (col*row)-totalMinas;
     }
 
     public int getCol(){return col;}
@@ -59,19 +50,10 @@ public class tauler {
     }
 
     public int getTotalMinas(){return totalMinas;}
+    public int getTotalFlags(){return totalFlags;}
 
-    public int getTotalFlags(){
-        int res=0;
-        for (int i=0;i<col;i++){
-            for (int j=0;j<row;j++){
-                if (tablero[i][j].isFlag()){
-                    res++;
-                }
-            }
-        }
+    public int getTotalUp(){return totalUp;}
 
-        return res;
-    }
 
 
     public void setMina(int x, int y){
@@ -83,13 +65,18 @@ public class tauler {
     }
 
     public void setUp(int x, int y){
+        totalUp++;
         tablero[x][y].setUp();
     }
 
     public void setFlag(int x, int y){
+        totalFlags += (tablero[x][y].isFlag())? -1:1;
         tablero[x][y].setFlag();
     }
 
+    public int getRestantes(){
+        return (col*row)-totalMinas;
+    }
 
 
     public void setCol(int c){col=c;}
@@ -97,8 +84,8 @@ public class tauler {
     public void setTotalMinas(int m){totalMinas=m;}
 
 
+
     public boolean dentroRango(int x ,int y){
         return  ( x>=0 && x<col && y>=0 && y<row );
     }
-
 }

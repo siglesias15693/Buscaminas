@@ -5,19 +5,20 @@ public class game {
     public static boolean running = true;
     public static tauler tauler;
 
-    public static void start() {
-        interaction.dificulty();
+    private static String mensajeError= "";
+
+    public void start() {
         tauler = new tauler();
         play();
     }
 
-    public static void play(){
+    public void play(){
         assignarMinas();
         assignarValores();
 
         while (running) {
-            dibujo.mostrarTablero();
-            interaction.eleccion();
+            dibujo.mostrarTablero(tauler);
+            momentojugador();
         }
     }
 
@@ -31,10 +32,11 @@ public class game {
                 tauler.setMina(x,y);
                 m++;
             }
+
         }
     }
 
-    public static void assignarValores() {
+    public void assignarValores() {
         for (int x = 0; x < tauler.getCol(); x++) {
             for (int y = 0; y < tauler.getRow(); y++) {
                 if (tauler.isMina(x,y)){
@@ -52,15 +54,64 @@ public class game {
         }
     }
 
-    public static void esCero(int x, int y) {
-        if ( x-1>=0 && y-1>=0 ) {
-            interaction.jugada(x - 1, y - 1);
+    public static void jugada(int x, int y) {
+        if (!tauler.getCell(x,y).isUp()){
+
+            tauler.getCell(x,y).setUp();
+
+            if (tauler.isMina(x,y)) {
+                gameover();
+            }
+
+            if (tauler.getMinasArround(x,y) == 0) {
+                esCero(x,y);
+            }
         }
+
+        comprovarVictoria();
+    }
+
+    public static void momentojugador(){
+        boolean bucle=true;
+
+        System.out.println(mensajeError);
+        mensajeError = "";
+
+        while (bucle){
+            System.out.print("        Introduzca el numero de fila: ");
+            int row=tauler.getRow()-interaction.intoducirNum();
+
+            System.out.print("        Introduzca el numero de columna: ");
+            int col=interaction.intoducirNum()-1;
+
+            System.out.print("        Flag?[Y/N]: ");
+            boolean flag=interaction.intoducirFlag();
+
+            if (tauler.dentroRango(col,row)) {
+                if (!tauler.isUp(col,row)) {
+                    if (flag){
+                        tauler.setFlag(col,row);
+                    }else {
+                        jugada(col, row);
+                    }
+                    bucle = false;
+                }else{
+                    mensajeError = "\n\033[35m**ERROR:\u001B[0m Esta posicion ya esta verificada";
+                }
+            } else {
+                mensajeError = "\n\033[35m**ERROR:\u001B[0m La fila o columna esta fuera de rango";
+            }
+
+        }
+
+    }
+
+    public static void esCero(int x, int y) {
 
         for (int i=-1;i<=1;i++){
             for (int j=-1;j<=1;j++){
                 if (tauler.dentroRango(x+i,y+j)){
-                    interaction.jugada(x+i,y+j);
+                    jugada(x+i,y+j);
                 }
             }
         }
@@ -68,14 +119,14 @@ public class game {
     }
 
     public static void gameover(){
-        dibujo.mostrarTablero();
+        dibujo.mostrarTablero(tauler);
         System.out.print("\033[31mGAME OVER\u001B[0m");
         running=false;
     }
 
     public static void comprovarVictoria() {
         if (tauler.getTotalUp() >= tauler.getRestantes()) {
-            dibujo.mostrarTablero();
+            dibujo.mostrarTablero(tauler);
             System.out.println("\033[32m¡¡¡Victoria!!!!!\u001B[0m");
             running = false;
         }

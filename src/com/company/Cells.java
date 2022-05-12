@@ -41,6 +41,7 @@ public class Cells {
     }
 
     public void setFlag(){
+        // compt flags
         flag=!flag;
     }
 

@@ -14,7 +14,6 @@ public class game {
 
     public void play(){
         assignarMinas();
-        assignarValores();
 
         while (running) {
             dibujo.mostrarTablero(tauler);
@@ -30,28 +29,23 @@ public class game {
 
             if (!tauler.isMina(x,y)) {
                 tauler.setMina(x,y);
+                assignarValores(x,y);
                 m++;
             }
 
         }
     }
 
-    public void assignarValores() {
-        for (int x = 0; x < tauler.getCol(); x++) {
-            for (int y = 0; y < tauler.getRow(); y++) {
-                if (tauler.isMina(x,y)){
+    public static void assignarValores(int x, int y) {
 
-                    for (int i=-1;i<=1;i++){
-                        for (int j=-1;j<=1;j++){
-                            if (tauler.dentroRango(x+i,y+j)){
-                                tauler.sumMinas(x+i,y+j);
-                            }
-                        }
-                    }
-
+        for (int i=-1;i<=1;i++){
+            for (int j=-1;j<=1;j++){
+                if (tauler.dentroRango(x+i,y+j)){
+                    tauler.sumMinas(x+i,y+j);
                 }
             }
         }
+
     }
 
     public static void jugada(int x, int y) {

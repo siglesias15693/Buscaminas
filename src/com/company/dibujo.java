@@ -3,12 +3,21 @@ package com.company;
 public class dibujo{
 
     public static void mostrarTablero(tauler tauler) {
-        System.out.print("         ");
-        for (int i = 0; i < tauler.getCol(); i++) {
-            System.out.print("___ ");
-        }System.out.println();
 
+        seperador(tauler);
+
+        printTable(tauler);
+
+        colNum(tauler);
+
+        System.out.println("       |=======================|| N°Minas " + tauler.getTotalFlags() + "/" + tauler.getTotalMinas() + " ||");
+
+    }
+
+
+    public static void printTable(tauler tauler){
         int n=tauler.getRow()+1;
+
         for (int i = 0; i < tauler.getRow(); i++) {
             n--;
 
@@ -25,23 +34,32 @@ public class dibujo{
             }
 
             System.out.println();
-            if (i < tauler.getRow() -1) {
-                System.out.print("        |");
-                for (int p = 0; p < tauler.getCol() ; p++) {
-                    if (p==tauler.getCol()-1){
-                        System.out.print("--–");
-                    }else{
-                        System.out.print("--– ");
-                    }
-                }
-                System.out.println("|");
+            if (i<tauler.getRow()-1){seperador(tauler);}
+
+        }
+    }
+
+    public static void seperador(tauler tauler){
+
+        System.out.print("         ");
+        for (int p = 0; p < tauler.getCol() ; p++) {
+            if (p==tauler.getCol()-1){
+                System.out.print("--–");
+            }else{
+                System.out.print("--– ");
             }
         }
+        System.out.println();
+
+    }
+
+    public static void colNum(tauler tauler){
         System.out.print("         ");
         for (int i = 1; i < tauler.getCol() + 1; i++) {
             System.out.print("¯¯¯ ");
         }
         System.out.println();
+
 
         System.out.print("          ");
         for (int i = 1; i < tauler.getCol() + 1; i++) {
@@ -53,10 +71,6 @@ public class dibujo{
             }
 
         }System.out.println();System.out.println();
-
-
-        System.out.println("        |======================|| N°Minas " + tauler.getTotalFlags() + "/" + tauler.getTotalMinas() + " ||");
-
     }
 
 }

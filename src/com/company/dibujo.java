@@ -1,6 +1,6 @@
 package com.company;
 
-import static com.company.Main.*;
+import static com.company.init.*;
 
 public class dibujo{
 
@@ -22,7 +22,7 @@ public class dibujo{
 
 
             for (int j = 0; j < Columnas; j++) {
-                System.out.print(tauler.cell(j,i).show());
+                System.out.print(tauler.getCell(j,i).show());
                 System.out.print("|");
             }
 

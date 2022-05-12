@@ -25,8 +25,6 @@ public class Cells {
         return (minas);
     }
 
-    public boolean getFlag(){return flag;}
-
 
     public void setMina() {
         mina = true;

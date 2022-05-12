@@ -19,7 +19,10 @@ public class tauler {
         }
     }
 
-    public Cells cell(int x, int y){
+    //public int getCol(){return col;}
+    //public int getRow(){return row;}
+
+    public Cells getCell(int x, int y){
         return tablero[x][y];
     }
 
@@ -34,11 +37,6 @@ public class tauler {
     public int getMinas(int x, int y){
         return tablero[x][y].getMinas();
     }
-
-    public boolean getFlag(int x, int y){
-        return tablero[x][y].getFlag();
-    }
-
 
 
     public void setMina(int x, int y){

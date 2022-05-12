@@ -1,6 +1,6 @@
 package com.company;
 
-import static com.company.Main.*;
+import static com.company.init.*;
 import java.util.Scanner;
 
 public class interaction {
@@ -44,9 +44,9 @@ public class interaction {
     }
 
     public static void jugada( int x,int y) {
-        if (!tauler.cell(x,y).isUp()){
+        if (!tauler.getCell(x,y).isUp()){
             cassillasGiradas++;
-            tauler.cell(x,y).setUp();
+            tauler.getCell(x,y).setUp();
 
             if (tauler.isMina(x,y)) {
                 gameover();
